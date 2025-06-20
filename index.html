@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>NubeProCartaz</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script defer src="script.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+
+  <!-- LOGIN -->
+  <div id="login-section" class="flex flex-col items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-80">
+      <h1 class="text-xl font-bold mb-4 text-center">NubeProCartaz</h1>
+      <input id="username" type="text" placeholder="Usuário" class="w-full p-2 border mb-2">
+      <input id="password" type="password" placeholder="Senha" class="w-full p-2 border mb-4">
+      <button onclick="login()" class="bg-blue-600 text-white w-full p-2 rounded">Entrar</button>
+      <p id="error" class="text-red-500 mt-2 hidden">Usuário ou senha inválidos</p>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard-section" class="hidden">
+    <h1 class="text-2xl font-bold mb-4">Cadastro de Produtos</h1>
+
+    <div class="mb-6">
+      <input id="nome" placeholder="Nome do Produto" class="border p-2 mr-2">
+      <input id="preco" placeholder="Preço" class="border p-2 mr-2">
+      <input id="ean" placeholder="EAN" class="border p-2 mr-2">
+      <input id="logo" type="file" class="border p-2 mr-2">
+      <select id="modelo" class="border p-2 mr-2">
+        <option value="padrao">Padrão</option>
+        <option value="promocao">Promoção De/Por</option>
+      </select>
+      <button onclick="adicionarProduto()" class="bg-green-600 text-white p-2 rounded">Adicionar</button>
+    </div>
+
+    <div class="flex justify-between items-center mb-2"><h2 class="text-xl font-semibold">Produtos Cadastrados</h2><div><input id="filtro" placeholder="Buscar produto..." oninput="filtrarProdutos()" class="border p-1 mr-2"/><button onclick="exportarProdutos()" class="bg-gray-700 text-white px-3 py-1 rounded">Exportar</button></div></div>
+    <table class="w-full bg-white rounded shadow-md mb-4">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="p-2 text-left">Nome</th>
+          <th class="p-2 text-left">Preço</th>
+          <th class="p-2 text-left">EAN</th>
+          <th class="p-2 text-left">Modelo</th>
+          <th class="p-2 text-left">Prévia</th>
+          <th class="p-2 text-left">PDF</th>
+          <th class="p-2 text-left">Editar</th>
+        </tr>
+      </thead>
+      <tbody id="lista-produtos"></tbody>
+    </table>
+
+    <h2 class="text-xl font-semibold mb-2">Pré-visualização</h2>
+    <canvas id="previewCanvas" width="595" height="842" class="bg-white shadow-md border border-gray-300"></canvas>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
